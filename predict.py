@@ -6,9 +6,11 @@ and predicts which of the 7 authors wrote it using both Burrows' Delta and Logis
 """
 
 import argparse
+import json
 from pathlib import Path
 import sys
 
+import joblib
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -19,26 +21,40 @@ from src.delta import BurrowsDelta
 from src.features import StylometricExtractor
 
 
-def train_production_models(features_csv: Path):
-    """Train models on the complete balanced feature set."""
+def load_or_train_models(
+    models_dir: Path = Path("models"),
+    features_csv: Path = Path("data/processed/features_1000.csv"),
+):
+    """Load pre-trained models from disk or train on the fly if missing."""
+    delta_path = models_dir / "burrows_delta.joblib"
+    lr_path = models_dir / "logistic_regression.joblib"
+    scaler_path = models_dir / "scaler.joblib"
+    meta_path = models_dir / "metadata.json"
+
+    if delta_path.exists() and lr_path.exists() and scaler_path.exists() and meta_path.exists():
+        delta_clf = joblib.load(delta_path)
+        lr_clf = joblib.load(lr_path)
+        scaler = joblib.load(scaler_path)
+        meta = json.loads(meta_path.read_text(encoding="utf-8"))
+        feature_cols = meta["feature_names"]
+        vocab = meta["vocabulary"]
+        return delta_clf, lr_clf, scaler, feature_cols, vocab
+
+    # Fallback to on-the-fly training
     df = pd.read_csv(features_csv)
     feature_cols = [c for c in df.columns if c not in ["author", "book"]]
     X = df[feature_cols].values
     y = df["author"].values
 
-    # 1. Burrows' Delta
     delta_clf = BurrowsDelta()
     delta_clf.fit(X, y)
 
-    # 2. Logistic Regression
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     lr_clf = LogisticRegression(max_iter=1500, random_state=42)
     lr_clf.fit(X_scaled, y)
 
-    # Reconstruct vocabulary from columns
     vocab = [c[3:] for c in feature_cols if c.startswith("fw_")]
-
     return delta_clf, lr_clf, scaler, feature_cols, vocab
 
 
@@ -54,7 +70,9 @@ def predict_snippet(text: str, features_csv: Path = Path("data/processed/feature
     if word_count < 30:
         print(f"[Uyarı] Metin çok kısa ({word_count} kelime). Güvenilir stilometri için en az 100-500 kelime önerilir.")
 
-    delta_clf, lr_clf, scaler, feature_cols, vocab = train_production_models(features_csv)
+    delta_clf, lr_clf, scaler, feature_cols, vocab = load_or_train_models(
+        models_dir=Path("models"), features_csv=features_csv
+    )
 
     extractor = StylometricExtractor(top_n_words=150)
     extractor.vocabulary = vocab
