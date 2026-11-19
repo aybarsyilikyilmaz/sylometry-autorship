@@ -24,6 +24,10 @@ Thumbs.db
 data/raw/*
 !data/raw/.gitkeep
 
+# Academic submission PDF documents
+*.pdf
+SEN4015_*.pdf
+
 # IDE / Editor configuration
 .idea/
 .vscode/
