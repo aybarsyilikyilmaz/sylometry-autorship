@@ -1,0 +1,31 @@
+# Python virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python byte-code and cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Operating system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Project data
+data/raw/*
+!data/raw/.gitkeep
+
+# IDE / Editor configuration
+.idea/
+.vscode/
+*.swp
+*.swo
