@@ -92,7 +92,9 @@ def predict_snippet(text: str, features_csv: Path = Path("data/processed/feature
     dist_df = delta_clf.predict_distance_matrix(feat_vector)
     delta_probs = delta_clf.predict_proba(feat_vector)[0]
 
-    scaled_vector = scaler.transform(feat_vector)
+    # Robust z-score clipping to prevent single outlier features (like TTR on short snippets)
+    # from blowing up log-odds while preserving true ranking signals
+    scaled_vector = np.clip(scaler.transform(feat_vector), -3.5, 3.5)
     lr_pred = lr_clf.predict(scaled_vector)[0]
     lr_probs = lr_clf.predict_proba(scaled_vector)[0]
 

@@ -47,39 +47,68 @@ AUTHORS_AND_BOOKS = {
 
 AUTHOR_SIGNATURES = {
     "Jane_Austen": {
-        "words": ["affection", "delight", "feelings", "sister", "manner", "civil", "pleasure", "admiration", "family", "fortune", "marriage", "duty", "truth", "society", "hope"],
-        "sentence_len_range": (18, 32),
+        "words": [
+            "affection", "delight", "feelings", "sister", "manner", "civil", "pleasure",
+            "admiration", "family", "fortune", "marriage", "duty", "truth", "society",
+            "hope", "esteem", "propriety", "acquaintance", "elegance", "pride", "folly"
+        ],
+        "sentence_len_range": (18, 34),
         "punct_weights": {",": 8, ";": 3, "-": 1, "!": 1, "?": 2},
     },
     "Charlotte_Bronte": {
-        "words": ["passion", "spirit", "shadow", "master", "solitude", "strange", "dark", "soul", "heart", "lonely", "storm", "silent", "wild", "fever", "secret"],
-        "sentence_len_range": (16, 30),
+        "words": [
+            "passion", "spirit", "shadow", "master", "solitude", "strange", "dark", "soul",
+            "heart", "lonely", "storm", "silent", "wild", "fever", "secret", "moors",
+            "rebel", "pain", "sadness", "agony", "reserve", "haunted", "glance"
+        ],
+        "sentence_len_range": (16, 32),
         "punct_weights": {",": 7, ";": 4, "-": 3, "!": 3, "?": 2},
     },
     "Charles_Dickens": {
-        "words": ["fog", "river", "court", "gentleman", "hands", "london", "shadow", "street", "clock", "pavement", "crowd", "dust", "heavy", "mud", "night"],
-        "sentence_len_range": (26, 48),
+        "words": [
+            "fog", "river", "court", "gentleman", "hands", "london", "shadow", "street",
+            "clock", "pavement", "crowd", "dust", "heavy", "mud", "night", "gloom",
+            "cathedral", "tower", "stone", "graveyard", "child", "poor", "sorrow", "echo"
+        ],
+        "sentence_len_range": (26, 50),
         "punct_weights": {",": 10, ";": 6, "-": 2, "!": 2, "?": 2},
     },
     "Arthur_Conan_Doyle": {
-        "words": ["holmes", "watson", "clue", "case", "deduction", "crime", "cab", "baker", "street", "footprints", "mystery", "telegram", "evidence", "observation", "inspector"],
-        "sentence_len_range": (12, 22),
-        "punct_weights": {",": 6, ";": 1, "-": 2, "!": 2, "?": 5},
+        "words": [
+            "holmes", "watson", "clue", "case", "deduction", "crime", "cab", "baker",
+            "street", "footprints", "mystery", "telegram", "evidence", "observation", "inspector",
+            "challenger", "specimen", "danger", "expedition", "scientific", "laboratory",
+            "creature", "discovery", "beast", "professor", "strange", "density"
+        ],
+        "sentence_len_range": (14, 25),
+        "punct_weights": {",": 6, ";": 2, "-": 2, "!": 2, "?": 4},
     },
     "Mark_Twain": {
-        "words": ["reckon", "raft", "river", "folks", "ain", "mighty", "tom", "huck", "steamboat", "shucks", "jim", "creek", "trouble", "hollow", "plenty"],
-        "sentence_len_range": (10, 20),
+        "words": [
+            "reckon", "raft", "river", "folks", "ain", "mighty", "tom", "huck", "steamboat",
+            "shucks", "jim", "creek", "trouble", "hollow", "plenty", "stranger", "fool",
+            "human", "dollars", "nigger", "whiskey", "village", "leisure"
+        ],
+        "sentence_len_range": (10, 22),
         "punct_weights": {",": 5, ";": 1, "-": 3, "!": 4, "?": 3},
     },
     "HG_Wells": {
-        "words": ["machine", "apparatus", "dimension", "space", "specimen", "planet", "cylinder", "experiment", "metal", "observer", "velocity", "strange", "mechanism", "future", "matter"],
-        "sentence_len_range": (14, 24),
+        "words": [
+            "machine", "apparatus", "dimension", "space", "specimen", "planet", "cylinder",
+            "experiment", "metal", "observer", "velocity", "mechanism", "future", "matter",
+            "time", "centuries", "travel", "scientific", "airship", "engines", "vibrating"
+        ],
+        "sentence_len_range": (14, 26),
         "punct_weights": {",": 6, ";": 2, "-": 2, "!": 1, "?": 2},
     },
     "Oscar_Wilde": {
-        "words": ["beauty", "cynic", "art", "charm", "scandal", "portrait", "vanity", "youth", "pleasure", "temptation", "witty", "soul", "flattery", "luxury", "passion"],
-        "sentence_len_range": (12, 24),
-        "punct_weights": {",": 6, ";": 3, "-": 5, "!": 5, "?": 4},
+        "words": [
+            "beauty", "cynic", "art", "charm", "scandal", "portrait", "vanity", "youth",
+            "pleasure", "temptation", "witty", "soul", "flattery", "luxury", "passion",
+            "artist", "individualism", "moral", "critic", "perfection", "disturbing", "force"
+        ],
+        "sentence_len_range": (12, 26),
+        "punct_weights": {",": 6, ";": 3, "-": 4, "!": 4, "?": 4},
     }
 }
 
