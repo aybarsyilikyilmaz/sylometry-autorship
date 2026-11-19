@@ -31,6 +31,11 @@ stylometry-authorship/
 │   ├── confusion_matrix.png
 │   ├── chunk_accuracy.png
 │   └── pca_clusters.png
+├── models/                   # Eğitilmiş üretim modelleri (Git'e dahil)
+│   ├── burrows_delta.joblib
+│   ├── logistic_regression.joblib
+│   ├── scaler.joblib
+│   └── metadata.json
 ├── src/
 │   ├── __init__.py
 │   ├── corpus.py             # TextCleaner & CorpusLoader sınıfları
@@ -39,6 +44,9 @@ stylometry-authorship/
 │   ├── evaluator.py          # ExperimentRunner sınıfı (GroupKFold CV & Logistic Regression)
 │   └── viz.py                # Görselleştirme fonksiyonları (Isı haritası, çizgi grafik, 2D PCA)
 ├── main.py                   # Uçtan uca deneyleri çalıştıran ana betik
+├── train.py                  # Modelleri eğiten ve models/ altına kaydeden betik
+├── predict.py                # Metin parçası üzerinde anında yazar tahmini yapan CLI
+├── REPORT.md                 # Detaylı akademik araştırma raporu
 ├── requirements.txt
 └── README.md
 ```
@@ -102,6 +110,15 @@ source .venv/bin/activate
 # Gereksinimlerin yüklenmesi
 pip install -r requirements.txt
 
-# Ana deneylerin yürütülmesi
+# Ana deneylerin yürütülmesi (Tüm parça boyutları ve grafikler)
 python main.py
+
+# Modellerin eğitilip kaydedilmesi (Production training)
+python train.py --chunk-size 1000
+
+# Anında metin analizi ve yazar tahmini
+python predict.py "It is a truth universally acknowledged..."
+
+# Külliyat dışı bağımsız eserlerle genelleme testi
+python scripts/test_out_of_corpus.py
 ```
